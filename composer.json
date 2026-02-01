@@ -1,15 +1,32 @@
 {
     "name": "dev-toolbelt/jsend-payload",
-    "description": "",
+    "description": "A framework-agnostic PHP library for building standardized JSend API responses with PSR-7 support",
     "type": "library",
     "license": "MIT",
-    "keywords": [],
+    "keywords": [
+        "jsend",
+        "api",
+        "json",
+        "response",
+        "psr-7",
+        "rest",
+        "http",
+        "payload",
+        "standardized-responses"
+    ],
     "authors": [
         {
             "name": "Kilderson Sena",
-            "email": "dersonsena@gmail.com"
+            "email": "dersonsena@gmail.com",
+            "homepage": "https://github.com/dersonsena",
+            "role": "Developer"
         }
     ],
+    "homepage": "https://github.com/Dev-Toolbelt/jsend-payload",
+    "support": {
+        "issues": "https://github.com/Dev-Toolbelt/jsend-payload/issues",
+        "source": "https://github.com/Dev-Toolbelt/jsend-payload"
+    },
     "scripts": {
         "test": "phpunit --configuration tests/phpunit.xml",
         "test:coverage": "phpunit --configuration tests/phpunit.xml --coverage-html tests/coverage",
