@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace DevToolbelt\JsendPayload;
 
 use DevToolbelt\Enums\Http\HttpStatusCode as Code;
-use DevToolbelt\JsendPayload\Enums\JsendStatus;
 use Nyholm\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 

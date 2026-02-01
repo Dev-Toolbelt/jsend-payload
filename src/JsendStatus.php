@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DevToolbelt\JsendPayload\Enums;
+namespace DevToolbelt\JsendPayload;
 
 enum JsendStatus: string
 {
