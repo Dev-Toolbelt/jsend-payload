@@ -11,14 +11,22 @@ use Psr\Http\Message\ResponseInterface;
 
 trait AnswerTrait
 {
-    public function answerSuccess(mixed $data, Code $code = Code::OK): ResponseInterface
+    public function answerSuccess(mixed $data, Code $code = Code::OK, array $meta = []): ResponseInterface
     {
-        return $this->jsonResponse(['status' => JsendStatus::SUCCESS->value, 'data' => $data], $code);
+        return $this->jsonResponse([
+            'status' => JsendStatus::SUCCESS->value,
+            'data' => $data,
+            'meta' => $meta
+        ], $code);
     }
 
-    public function answerFail(array $data, Code $code = Code::BAD_REQUEST): ResponseInterface
+    public function answerFail(array $data, Code $code = Code::BAD_REQUEST, array $meta = []): ResponseInterface
     {
-        return $this->jsonResponse(['status' => JsendStatus::FAIL->value, 'data' => $data], $code);
+        return $this->jsonResponse([
+            'status' => JsendStatus::FAIL->value,
+            'data' => $data,
+            'meta' => $meta
+        ], $code);
     }
 
     public function answerError(

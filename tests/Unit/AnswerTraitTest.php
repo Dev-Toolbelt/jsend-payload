@@ -27,7 +27,37 @@ final class AnswerTraitTest extends TestCase
         self::assertSame(200, $response->getStatusCode());
         self::assertSame('application/json', $response->getHeaderLine('Content-Type'));
         self::assertSame(
-            ['status' => 'success', 'data' => ['id' => 10]],
+            ['status' => 'success', 'data' => ['id' => 10], 'meta' => []],
+            $this->decodeResponse($response)
+        );
+    }
+
+    public function testAnswerSuccessWithMetaReturnsJsendSuccessPayloadWithMeta(): void
+    {
+        $meta = ['page' => 1, 'perPage' => 10, 'total' => 100];
+
+        $response = $this->subject->answerSuccess(['id' => 10], HttpStatusCode::OK, $meta);
+
+        self::assertSame(200, $response->getStatusCode());
+        self::assertSame(
+            ['status' => 'success', 'data' => ['id' => 10], 'meta' => $meta],
+            $this->decodeResponse($response)
+        );
+    }
+
+    public function testAnswerSuccessWithCustomStatusCodeAndMeta(): void
+    {
+        $meta = ['version' => '1.0'];
+
+        $response = $this->subject->answerSuccess(
+            ['id' => 1, 'name' => 'John'],
+            HttpStatusCode::CREATED,
+            $meta
+        );
+
+        self::assertSame(201, $response->getStatusCode());
+        self::assertSame(
+            ['status' => 'success', 'data' => ['id' => 1, 'name' => 'John'], 'meta' => $meta],
             $this->decodeResponse($response)
         );
     }
@@ -40,7 +70,35 @@ final class AnswerTraitTest extends TestCase
 
         self::assertSame(400, $response->getStatusCode());
         self::assertSame(
-            ['status' => 'fail', 'data' => $errors],
+            ['status' => 'fail', 'data' => $errors, 'meta' => []],
+            $this->decodeResponse($response)
+        );
+    }
+
+    public function testAnswerFailWithMetaReturnsJsendFailPayloadWithMeta(): void
+    {
+        $errors = [['field' => 'email', 'error' => 'invalid']];
+        $meta = ['requestId' => 'abc-123', 'timestamp' => '2024-01-01T00:00:00Z'];
+
+        $response = $this->subject->answerFail($errors, HttpStatusCode::BAD_REQUEST, $meta);
+
+        self::assertSame(400, $response->getStatusCode());
+        self::assertSame(
+            ['status' => 'fail', 'data' => $errors, 'meta' => $meta],
+            $this->decodeResponse($response)
+        );
+    }
+
+    public function testAnswerFailWithCustomStatusCodeAndMeta(): void
+    {
+        $errors = [['field' => 'token', 'error' => 'expired']];
+        $meta = ['retryAfter' => 300];
+
+        $response = $this->subject->answerFail($errors, HttpStatusCode::UNAUTHORIZED, $meta);
+
+        self::assertSame(401, $response->getStatusCode());
+        self::assertSame(
+            ['status' => 'fail', 'data' => $errors, 'meta' => $meta],
             $this->decodeResponse($response)
         );
     }
@@ -95,6 +153,7 @@ final class AnswerTraitTest extends TestCase
                     'error' => 'invalidUuidFormat',
                     'message' => 'The provided uuid format is invalid',
                 ]],
+                'meta' => [],
             ],
             $this->decodeResponse($response)
         );
@@ -113,6 +172,7 @@ final class AnswerTraitTest extends TestCase
                     'error' => 'recordNotFound',
                     'message' => 'The record was not found with the given id',
                 ]],
+                'meta' => [],
             ],
             $this->decodeResponse($response)
         );
@@ -130,6 +190,7 @@ final class AnswerTraitTest extends TestCase
                     'error' => 'emptyPayload',
                     'message' => 'It was send a empty payload',
                 ]],
+                'meta' => [],
             ],
             $this->decodeResponse($response)
         );
@@ -148,6 +209,7 @@ final class AnswerTraitTest extends TestCase
                     'error' => 'required',
                     'message' => 'The "email" field is required',
                 ]],
+                'meta' => [],
             ],
             $this->decodeResponse($response)
         );
@@ -166,6 +228,7 @@ final class AnswerTraitTest extends TestCase
                     'error' => 'columnNotFound',
                     'message' => 'The "created_at" column was not found',
                 ]],
+                'meta' => [],
             ],
             $this->decodeResponse($response)
         );
