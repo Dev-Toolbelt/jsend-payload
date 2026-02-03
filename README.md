@@ -1,10 +1,11 @@
 # JSend Payload
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/dev-toolbelt/jsend-payload.svg?style=flat-square)](https://packagist.org/packages/dev-toolbelt/jsend-payload)
-[![Total Downloads](https://img.shields.io/packagist/dt/dev-toolbelt/jsend-payload.svg?style=flat-square)](https://packagist.org/packages/dev-toolbelt/jsend-payload)
-[![License](https://img.shields.io/packagist/l/dev-toolbelt/jsend-payload.svg?style=flat-square)](https://packagist.org/packages/dev-toolbelt/jsend-payload)
-[![PHP Version](https://img.shields.io/packagist/php-v/dev-toolbelt/jsend-payload.svg?style=flat-square)](https://packagist.org/packages/dev-toolbelt/jsend-payload)
-[![PHPStan Level](https://img.shields.io/badge/PHPStan-level%206-brightgreen.svg?style=flat-square)](https://phpstan.org/)
+[![CI](https://github.com/dev-toolbelt/jsend-payload/actions/workflows/ci.yml/badge.svg)](https://github.com/dev-toolbelt/jsend-payload/actions/workflows/ci.yml)
+[![Coverage](https://codecov.io/gh/dev-toolbelt/jsend-payload/branch/main/graph/badge.svg)](https://codecov.io/gh/dev-toolbelt/jsend-payload)
+[![Latest Stable Version](https://poser.pugx.org/dev-toolbelt/jsend-payload/v/stable)](https://packagist.org/packages/dev-toolbelt/jsend-payload)
+[![Total Downloads](https://poser.pugx.org/dev-toolbelt/jsend-payload/downloads)](https://packagist.org/packages/dev-toolbelt/jsend-payload)
+[![License](https://poser.pugx.org/dev-toolbelt/jsend-payload/license)](https://packagist.org/packages/dev-toolbelt/jsend-payload)
+[![PHP Version](https://img.shields.io/packagist/php-v/dev-toolbelt/jsend-payload)](https://packagist.org/packages/dev-toolbelt/jsend-payload)
 
 A framework-agnostic PHP library for building standardized API responses following the [JSend specification](https://github.com/omniti-labs/jsend). Provides a simple trait that can be mixed into any controller or handler to generate consistent JSON responses with PSR-7 support.
 
@@ -560,6 +561,31 @@ composer phpcs:fix
 
 If you discover any security-related issues, please email dersonsena@gmail.com instead of using the issue tracker.
 
+### Code Quality Requirements
+
+| Check | Tool | Requirement |
+|-------|------|-------------|
+| Tests | PHPUnit | All tests must pass |
+| Coverage | PCOV | Minimum **85%** coverage |
+| Code Style | PHP CodeSniffer | PSR-12 compliant |
+| Static Analysis | PHPStan | Level 6, no errors |
+
+### Pull Request Guidelines
+
+Before submitting a PR, ensure:
+
+1. **All tests pass:** `composer test`
+2. **Coverage is at least 85%:** `composer test:coverage`
+3. **Code style is correct:** `composer phpcs`
+4. **No static analysis errors:** `composer phpstan`
+
+> **Important:** Pull requests with coverage below 85% will be automatically blocked by CI.
+
+### Coverage Report
+
+- **Dashboard:** [Codecov](https://codecov.io/gh/dev-toolbelt/jsend-payload)
+- **HTML Report:** [GitHub Pages](https://dev-toolbelt.github.io/jsend-payload/)
+
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE) for more information.
+MIT License. See [LICENSE](LICENSE) for details.
